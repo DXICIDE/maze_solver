@@ -6,7 +6,7 @@ class Window:
         self.__root.title = "root_widget"
         self.__canvas = Canvas(self.__root, bg="white", height=height, width=width)
         self.__canvas.pack(fill=BOTH, expand=1)
-        self.__running = "False"
+        self.__running = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
     
     def redraw(self):
@@ -22,7 +22,7 @@ class Window:
     def close(self):
         self.__running = False
 
-    def draw(self, line, fill_color):
+    def draw_line(self, line, fill_color):
         line.draw(self.__canvas, fill_color)
 
 class Point:
