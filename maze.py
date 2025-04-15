@@ -22,13 +22,22 @@ class Maze():
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
         self._win = win
+        self._win.maze = self
         if seed != None:
             self._seed = random.seed(seed)
+        self.create()
+
+    def create(self):
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0,0)
         self._reset_cells_visited()
         self.solve()
+    
+    def reset(self):
+        if self._win:
+            self._win.clear_canvas()
+            self.create()
 
     def _create_cells(self):
         self._cells = []
@@ -53,7 +62,7 @@ class Maze():
 
     def _animate(self):
         self._win.redraw()
-        time.sleep(0.05)
+        time.sleep(0.01)
     
     def _break_entrance_and_exit(self):
         if self._win is None:

@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas
+from tkinter import Tk, BOTH, Canvas, Button
 
 class Window:
     def __init__(self, width, height):
@@ -8,6 +8,16 @@ class Window:
         self.__canvas.pack(fill=BOTH, expand=1)
         self.__running = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
+        self.button = Button(self.__root, text="Reset", command=self.reset)
+        self.button.pack()
+        self.maze = None
+    
+    def clear_canvas(self):
+        self.__canvas.delete("all")
+
+    def reset(self):
+        self.maze.reset()
+        print("Reset button clicked")
     
     def redraw(self):
         self.__root.update_idletasks()
