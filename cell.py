@@ -1,7 +1,7 @@
 from window import *
 
 class Cell:
-    def __init__(self, x1, y1, x2, y2, win, has_left_wall = True, has_right_wall = True, has_top_wall = True, has_bottom_wall = True):
+    def __init__(self, x1, y1, x2, y2, win, has_left_wall = True, has_right_wall = True, has_top_wall = True, has_bottom_wall = True, visited = False):
         self._x1 = x1
         self._x2 = x2
         self._y1 = y1
@@ -11,18 +11,27 @@ class Cell:
         self.has_right_wall = has_right_wall
         self.has_top_wall = has_top_wall
         self.has_bottom_wall = has_bottom_wall
-        
+        self.visited = visited
+
     def draw(self):
         if self._win is None:
             return
         if self.has_top_wall:
             self._win.draw_line(Line(Point(self._x1,self._y1), Point(self._x2, self._y1)), "black")
+        else:
+            self._win.draw_line(Line(Point(self._x1,self._y1), Point(self._x2, self._y1)), "white")
         if self.has_bottom_wall:
             self._win.draw_line(Line(Point(self._x1,self._y2), Point(self._x2, self._y2)), "black")
+        else:
+            self._win.draw_line(Line(Point(self._x1,self._y2), Point(self._x2, self._y2)), "white")
         if self.has_left_wall:
             self._win.draw_line(Line(Point(self._x1,self._y1), Point(self._x1, self._y2)), "black")
+        else:
+            self._win.draw_line(Line(Point(self._x1,self._y1), Point(self._x1, self._y2)), "white")
         if self.has_right_wall:
             self._win.draw_line(Line(Point(self._x2,self._y1), Point(self._x2, self._y2)), "black")
+        else:
+            self._win.draw_line(Line(Point(self._x2,self._y1), Point(self._x2, self._y2)), "white")
 
     def draw_move(self, to_cell, undo = False):
         cell_a = Point((self._x1 + self._x2)/2,(self._y1 + self._y2)/2)
